@@ -20,7 +20,6 @@ Open http://localhost:5173
 | Route | Demo |
 |-------|------|
 | `#rose` | Automations (petal rose blend wheel) |
-| `#agents` | Agent marking menu |
 | `#meet` | Pixel meet scene |
 
 Use the hamburger menu (top-left) to switch between demos.

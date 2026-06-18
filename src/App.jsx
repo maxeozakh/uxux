@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import RosePage from './rose/RosePage';
 import MeetScene from './meet/MeetScene';
-import AgentMenu from './agents/AgentMenu';
 
 function useHashRoute() {
   const [hash, setHash] = useState(() => window.location.hash.replace('#', '') || 'rose');
@@ -15,7 +14,6 @@ function useHashRoute() {
 
 const DEMOS = [
   { id: 'rose', label: 'Automations', icon: '🌸' },
-  { id: 'agents', label: 'Marking menu', icon: '🎛️' },
   { id: 'meet', label: 'Meet scene', icon: '🎮' },
 ];
 
@@ -56,13 +54,7 @@ export default function App() {
   const route = useHashRoute();
   return (
     <>
-      {route === 'agents' ? (
-        <AgentMenu />
-      ) : route === 'meet' ? (
-        <MeetScene />
-      ) : (
-        <RosePage />
-      )}
+      {route === 'meet' ? <MeetScene /> : <RosePage />}
       <DemoNav route={route} />
     </>
   );
