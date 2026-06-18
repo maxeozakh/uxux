@@ -1,0 +1,171 @@
+.rose-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 48px;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fbf3ee 0%, var(--bg-app) 55%);
+  overflow-x: hidden;
+}
+
+.rose-page--bare {
+  justify-content: center;
+  padding: 24px 20px;
+}
+
+.rose-page__header {
+  text-align: center;
+  max-width: 440px;
+  margin-bottom: 20px;
+}
+
+.rose-page__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(26px, 7vw, 38px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.rose-page__sub {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.rose-switcher {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.rose-switcher__btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+
+.rose-switcher__btn--active {
+  background: #fff;
+  color: var(--text-primary);
+  box-shadow: 0 1px 4px rgba(40, 36, 28, 0.12);
+}
+
+.rose-stage {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+  touch-action: none;
+}
+
+.rose-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rose-disc {
+  filter: drop-shadow(0 8px 24px rgba(40, 36, 28, 0.08));
+}
+
+.rose-puck-body {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rose-puck-body--active {
+  transform: scale(1.22);
+}
+
+.rose-puck {
+  filter: drop-shadow(0 4px 10px rgba(40, 36, 28, 0.28));
+  cursor: grab;
+}
+
+.rose-svg:active .rose-puck {
+  cursor: grabbing;
+}
+
+.rose-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+
+.rose-pct {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.rose-readout {
+  margin-top: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 52px;
+}
+
+.rose-readout__kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.rose-readout__text {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 5.5vw, 26px);
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+
+/* Small floating nav to jump between the demos (easy to crop out of recordings) */
+.demo-nav {
+  position: fixed;
+  left: 14px;
+  bottom: 14px;
+  z-index: 500;
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(40, 36, 28, 0.1);
+}
+
+.demo-nav__btn {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.demo-nav__btn--active {
+  background: var(--text-primary);
+  color: #fff;
+}
