@@ -21,6 +21,9 @@ Open http://localhost:5173
 |-------|------|
 | `#rose` | Automations (petal rose blend wheel) |
 | `#agents` | Agent marking menu |
+| `#delegate` | Agent delegation chat — social inbox hand-off demo (auto-playing) |
+| `#genui` | Generative UI — three scenarios side by side (for recording) |
+| `#try` | Generative UI — interactive scenario picker (mobile-friendly, shareable) |
 
 Use the hamburger menu (top-left) to switch between demos.
 

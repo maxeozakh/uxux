@@ -1,0 +1,374 @@
+.dc-app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: var(--font-sans);
+  background: radial-gradient(120% 90% at 50% 0%, #fbf3ee 0%, #f0eee6 60%);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── chat card ── */
+.dc-card {
+  position: relative;
+  width: min(480px, 100%);
+  height: min(760px, 90vh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  box-shadow: 0 24px 70px rgba(40, 36, 28, 0.18), 0 4px 14px rgba(40, 36, 28, 0.06);
+}
+
+/* ── top bar: active agent dock (the "picker") ── */
+.dc-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 3;
+}
+
+.dc-dock {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2.5px solid #fff;
+  box-shadow: 0 6px 16px rgba(40, 36, 28, 0.2);
+  animation: dockSwap 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dc-dock__ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--c);
+  opacity: 0;
+  animation: dockRing 0.7s ease-out;
+}
+@keyframes dockSwap {
+  0% { transform: scale(0.4) rotate(-30deg); opacity: 0; }
+  60% { transform: scale(1.12) rotate(4deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+@keyframes dockRing {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.dc-top__meta { flex: 1; min-width: 0; }
+.dc-top__name {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+.dc-top__role {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.dc-status {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.dc-replay {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background 0.15s, color 0.15s;
+}
+.dc-replay:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+/* ── message stream ── */
+.dc-stream {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dc-row { display: flex; gap: 8px; align-items: flex-end; }
+.dc-row--user { justify-content: flex-end; }
+.dc-row--agent { justify-content: flex-start; }
+
+.dc-row__avatar { width: 28px; flex: none; align-self: flex-end; }
+.dc-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(40, 36, 28, 0.16);
+}
+
+.dc-bubble {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.45;
+  animation: bubbleIn 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dc-bubble--user {
+  background: var(--accent);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+
+/* blinking caret for streaming + composer typing */
+.dc-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1.5px;
+  background: currentColor;
+  vertical-align: -2px;
+  animation: caretBlink 1s steps(1) infinite;
+}
+@keyframes caretBlink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+.dc-bubble--agent {
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  border-bottom-left-radius: 6px;
+}
+.dc-bubble--agent em { font-style: italic; color: var(--c); }
+.dc-bubble__who {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c);
+  margin-bottom: 3px;
+}
+
+/* typing dots */
+.dc-bubble--typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 13px 14px;
+}
+.dc-bubble--typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: typing 1.2s infinite ease-in-out;
+}
+.dc-bubble--typing span:nth-child(2) { animation-delay: 0.15s; }
+.dc-bubble--typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ── inline hand-off marker ── */
+.dc-handoff {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 90%;
+  margin: 6px 0;
+  padding: 6px 12px 6px 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  animation: bubbleIn 0.32s ease;
+}
+.dc-handoff__avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(40, 36, 28, 0.18);
+}
+.dc-handoff__arrow { color: var(--text-muted); flex: none; }
+.dc-handoff__note { font-weight: 500; }
+
+/* ── hand-off dial overlay (reuses the picker arc) ── */
+.dial {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+.dial.is-shown { opacity: 1; }
+.dial.is-out { opacity: 0; }
+
+.dial__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(247, 243, 237, 0.66);
+  backdrop-filter: blur(4px);
+}
+
+.dial__pivot {
+  position: relative;
+  width: 0;
+  height: 0;
+  transform: translateY(38px);
+  transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* collapse upward toward the header dock as it dismisses */
+.dial.is-out .dial__pivot {
+  transform: translateY(-150px) scale(0.55);
+}
+
+/* apex marker: where the chosen agent lands */
+.dial__apex {
+  position: absolute;
+  left: 0;
+  top: -104px;
+  width: 64px;
+  height: 64px;
+  margin: -32px;
+  border-radius: 50%;
+  border: 2px dashed rgba(40, 36, 28, 0.18);
+}
+
+.dial__slot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: -23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.5s cubic-bezier(0.32, 1.32, 0.5, 1);
+}
+.dial__avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 16px rgba(40, 36, 28, 0.2);
+  transform: scale(0.82);
+  opacity: 0.65;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s, box-shadow 0.3s;
+}
+.dial__name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.dial__slot.is-landed .dial__avatar {
+  transform: scale(1.16);
+  opacity: 1;
+  box-shadow: 0 12px 28px rgba(40, 36, 28, 0.28),
+    0 0 0 5px color-mix(in srgb, var(--c) 30%, transparent);
+}
+.dial__slot.is-landed .dial__name { opacity: 1; transform: translateY(0); }
+
+/* ── faux composer ── */
+.dc-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+}
+.dc-composer__field {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-panel);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: border-color 0.2s ease;
+}
+.dc-composer__field[data-typing='true'] {
+  white-space: pre-wrap;
+  overflow: visible;
+  text-overflow: clip;
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+.dc-composer__send {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  opacity: 0.55;
+  transform: scale(0.9);
+  transition: background 0.3s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+.dc-composer__send.is-armed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-bubble, .dc-handoff, .dc-dock,
+  .dial__slot, .dial__avatar, .dial__name { animation: none; transition: none; }
+}

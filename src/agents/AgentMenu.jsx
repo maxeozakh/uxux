@@ -21,7 +21,7 @@ const loadPickedId = () => {
   } catch {
     // ignore unavailable/blocked storage
   }
-  return AGENTS[0].id;
+  return 'muse';
 };
 
 export default function AgentMenu() {

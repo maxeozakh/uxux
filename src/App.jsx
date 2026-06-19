@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import RosePage from './rose/RosePage';
 import AgentMenu from './agents/AgentMenu';
+import DelegationChat from './delegate/DelegationChat';
+import GenUIChat from './genui/GenUIChat';
+import GenUIPlay from './genui/GenUIPlay';
 
 function useHashRoute() {
   const [hash, setHash] = useState(() => window.location.hash.replace('#', '') || 'rose');
@@ -15,6 +18,9 @@ function useHashRoute() {
 const DEMOS = [
   { id: 'rose', label: 'Automations', icon: '🌸' },
   { id: 'agents', label: 'Marking menu', icon: '🎛️' },
+  { id: 'delegate', label: 'Delegation chat', icon: '💬' },
+  { id: 'genui', label: 'Generative UI (3-up)', icon: '✨', hidden: true },
+  { id: 'try', label: 'Generative UI (play)', icon: '🕹️' },
 ];
 
 function DemoNav({ route }) {
@@ -34,7 +40,7 @@ function DemoNav({ route }) {
 
       <nav className={`side-nav ${open ? 'side-nav--open' : ''}`}>
         <div className="side-nav__title">Demos</div>
-        {DEMOS.map((d) => (
+        {DEMOS.filter((d) => !d.hidden).map((d) => (
           <a
             key={d.id}
             className={`side-nav__item ${route === d.id ? 'side-nav__item--active' : ''}`}
@@ -54,7 +60,17 @@ export default function App() {
   const route = useHashRoute();
   return (
     <>
-      {route === 'agents' ? <AgentMenu /> : <RosePage />}
+      {route === 'agents' ? (
+        <AgentMenu />
+      ) : route === 'delegate' ? (
+        <DelegationChat />
+      ) : route === 'genui' ? (
+        <GenUIChat />
+      ) : route === 'try' ? (
+        <GenUIPlay />
+      ) : (
+        <RosePage />
+      )}
       <DemoNav route={route} />
     </>
   );

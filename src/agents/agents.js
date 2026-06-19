@@ -8,11 +8,11 @@ export const loreleiFace = (seed, bg) =>
 // 'atlas' is a hand-inked SVG that mimics the Lorelei Neutral ink style.
 // `color` drives accents (highlight glow + apex dot); `bg` is the avatar circle fill.
 export const AGENTS = [
-  { id: 'eric', name: 'Eric', role: 'morning recap', avatar: 'face', seed: 'ifh4hq75', color: '#C96442', bg: '#f6e9e0', ph: 'gimme the lazy morning rundown…' },
-  { id: 'mei', name: 'Mei', role: 'growth & research', avatar: 'face', seed: 'mh4693b8', color: '#5B83B0', bg: '#e6edf6', ph: 'where should I grow next?' },
-  { id: 'muse', name: 'Muse', role: 'creative, dreamy', avatar: 'face', seed: 'c5ekh2gv', color: '#C0568A', bg: '#f7e6ef', ph: 'dream up something wild…' },
-  { id: 'ralph', name: 'Ralph', role: 'loops & chores', avatar: 'face', seed: 'rzgb1lg2', color: '#5F9A4A', bg: '#e9f2e3', ph: 'queue up a chore to loop…' },
-  { id: 'atlas', name: 'Atlas', role: 'knowledge', avatar: 'atlas', color: '#2F6FE0', bg: '#e6eefb', ph: 'ask me anything you forgot…' },
+  { id: 'eric', name: 'Eric', role: 'inbox & DMs', avatar: 'face', seed: 'ifh4hq75', color: '#C96442', bg: '#f6e9e0', ph: 'triage my DMs for me…' },
+  { id: 'mei', name: 'Mei', role: 'growth & analytics', avatar: 'face', seed: 'mh4693b8', color: '#5B83B0', bg: '#e6edf6', ph: 'where\u2019s my next follower coming from?' },
+  { id: 'muse', name: 'Muse', role: 'content & captions', avatar: 'face', seed: 'c5ekh2gv', color: '#C0568A', bg: '#f7e6ef', ph: 'write me a caption that pops…' },
+  { id: 'ralph', name: 'Ralph', role: 'scheduling & loops', avatar: 'face', seed: 'rzgb1lg2', color: '#5F9A4A', bg: '#e9f2e3', ph: 'queue up this week\u2019s posts…' },
+  { id: 'atlas', name: 'Atlas', role: 'audience insights', avatar: 'atlas', color: '#2F6FE0', bg: '#e6eefb', ph: 'what does my audience want?' },
 ];
 
 // Simple, intentionally-rough placeholder bust (10x10). Recolored per agent.
